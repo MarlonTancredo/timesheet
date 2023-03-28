@@ -13,6 +13,7 @@ const SignUp = () => {
   const [name, setName] = useState("");
   const [surname, setSurname] = useState("");
   const [email, setEmail] = useState("");
+  const [confirmEmail, setConfirmEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
@@ -26,12 +27,20 @@ const SignUp = () => {
     }
   };
 
-  const saveUser = (name, surname, email, password, confirmPassword) => {
+  const saveUser = (
+    name,
+    surname,
+    email,
+    confirmEmail,
+    password,
+    confirmPassword
+  ) => {
     try {
       Axios.post(usersPath, {
         name: name,
         surname: surname,
         email: email,
+        confirmEmail: confirmEmail,
         password: password,
         confirmPassword: confirmPassword,
       });
@@ -49,6 +58,7 @@ const SignUp = () => {
     setName("");
     setSurname("");
     setEmail("");
+    setConfirmEmail("");
     setPassword("");
     setConfirmPassword("");
   };
@@ -58,20 +68,13 @@ const SignUp = () => {
       name === "" ||
       surname === "" ||
       email === "" ||
+      confirmEmail === "" ||
       password === "" ||
       confirmPassword === ""
     ) {
       alert("You must to fill all fields!");
       clearAllfields();
       return;
-    }
-
-    for (let i = 0; i < users.length; i++) {
-      if (email === users[i].email) {
-        alert("This e-mail already exists, please enter a different one!");
-        setEmail("");
-        return;
-      }
     }
 
     if (password !== confirmPassword) {
@@ -81,7 +84,23 @@ const SignUp = () => {
       return;
     }
 
-    saveUser(name, surname, email, password, confirmPassword);
+    if (email !== confirmEmail) {
+      alert("E-mails must to be equals!");
+      setEmail("");
+      setConfirmEmail("");
+      return;
+    }
+
+    for (let i = 0; i < users.length; i++) {
+      if (email === users[i].email) {
+        alert("This e-mail already exists, please enter a different one!");
+        setEmail("");
+        setConfirmEmail("");
+        return;
+      }
+    }
+
+    saveUser(name, surname, email, confirmEmail, password, confirmPassword);
 
     clearAllfields();
   };
@@ -114,6 +133,13 @@ const SignUp = () => {
           type="email"
           autoComplete="email"
           onChange={(e) => setEmail(e.target.value)}
+        />
+        <S.FieldsNames>Confirm E-mail</S.FieldsNames>
+        <S.Input
+          value={confirmEmail}
+          maxLength="50"
+          type="email"
+          onChange={(e) => setConfirmEmail(e.target.value)}
         />
         <S.FieldsNames>Password</S.FieldsNames>
         <S.Input

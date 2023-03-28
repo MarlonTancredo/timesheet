@@ -25,6 +25,7 @@ const addUser = () => {
     const name = req.body.name;
     const surname = req.body.surname;
     const email = req.body.email;
+    const confirmEmail = req.body.confirmEmail;
     const password = req.body.password;
     const confirmPassword = req.body.confirmPassword;
 
@@ -32,6 +33,7 @@ const addUser = () => {
       name: name,
       surname: surname,
       email: email,
+      confirmEmail: confirmEmail,
       password: password,
       confirmPassword: confirmPassword,
     });
