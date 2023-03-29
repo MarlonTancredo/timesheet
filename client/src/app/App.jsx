@@ -1,11 +1,13 @@
 import * as S from "./styles";
 
-import SignUp from "../components/sign-up/SignUp";
+import SignIn from "../components/sign-in/SignIn";
+// import SignUp from "../components/sign-up/SignUp";
 
 const App = () => {
   return (
     <S.AppWrapper>
-      <SignUp />
+      <SignIn />
+      {/* <SignUp /> */}
     </S.AppWrapper>
   );
 };

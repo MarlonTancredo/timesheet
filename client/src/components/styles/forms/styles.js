@@ -1,9 +1,6 @@
 import styled from "styled-components";
 
-const colors = {
-  grey: "#ccc",
-  fullGrey: "#444",
-};
+import colors from "../colors/styles";
 
 export const Wrapper = styled.div`
   width: 25rem;

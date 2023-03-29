@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
-import * as S from "./styles";
 
-import SignUpButtom from "../sign-up-buttom/SignUpButtom";
+import * as F from "../styles/forms/styles";
+
+import SignUpButton from "../sign-up-button/SignUpButton";
 
 import Axios from "axios";
 
@@ -106,60 +107,60 @@ const SignUp = () => {
   };
 
   return (
-    <S.Wrapper>
-      <S.FormWrapper>
-        <S.Title>Sign up</S.Title>
-        <S.Break />
-        <S.FieldsNames>Name</S.FieldsNames>
-        <S.Input
+    <F.Wrapper>
+      <F.FormWrapper>
+        <F.Title>Sign up</F.Title>
+        <F.Break />
+        <F.FieldsNames>Name</F.FieldsNames>
+        <F.Input
           value={name}
           maxLength="30"
           type="text"
           autoComplete="given-name"
           onChange={(e) => setName(e.target.value)}
         />
-        <S.FieldsNames>Last Name</S.FieldsNames>
-        <S.Input
+        <F.FieldsNames>Last Name</F.FieldsNames>
+        <F.Input
           value={surname}
           maxLength="30"
           type="text"
           autoComplete="family-name"
           onChange={(e) => setSurname(e.target.value)}
         />
-        <S.FieldsNames>E-mail</S.FieldsNames>
-        <S.Input
+        <F.FieldsNames>E-mail</F.FieldsNames>
+        <F.Input
           value={email}
           maxLength="50"
           type="email"
           autoComplete="email"
           onChange={(e) => setEmail(e.target.value)}
         />
-        <S.FieldsNames>Confirm E-mail</S.FieldsNames>
-        <S.Input
+        <F.FieldsNames>Confirm E-mail</F.FieldsNames>
+        <F.Input
           value={confirmEmail}
           maxLength="50"
           type="email"
           onChange={(e) => setConfirmEmail(e.target.value)}
         />
-        <S.FieldsNames>Password</S.FieldsNames>
-        <S.Input
+        <F.FieldsNames>Password</F.FieldsNames>
+        <F.Input
           value={password}
           maxLength="30"
           type="password"
           autoComplete="new-password"
           onChange={(e) => setPassword(e.target.value)}
         />
-        <S.FieldsNames>Confirm Password</S.FieldsNames>
-        <S.Input
+        <F.FieldsNames>Confirm Password</F.FieldsNames>
+        <F.Input
           value={confirmPassword}
           maxLength="30"
           type="password"
           autoComplete="new-password"
           onChange={(e) => setConfirmPassword(e.target.value)}
         />
-        <SignUpButtom signUpClick={handleAddUser} name="Sign up" />
-      </S.FormWrapper>
-    </S.Wrapper>
+        <SignUpButton signUpClick={handleAddUser} name="Sign up" />
+      </F.FormWrapper>
+    </F.Wrapper>
   );
 };
 
