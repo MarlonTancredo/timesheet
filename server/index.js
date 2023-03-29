@@ -3,16 +3,17 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const app = express();
 
+require("dotenv").config();
+
 const UserModel = require("./models/User");
 
 app.use(express.json());
 app.use(cors());
 
 //Data base connection.
+const DBPORT = process.env.DBPORT;
 mongoose
-  .connect(
-    "mongodb+srv://marlontancredo:marlontancredo123@crud.64d02cm.mongodb.net/?retryWrites=true&w=majority"
-  )
+  .connect(DBPORT)
   .then(() => {
     console.log("Database conected!");
   })
@@ -86,7 +87,7 @@ getAllUsers();
 deleteUser();
 updateUser();
 
-const port = 3001;
-app.listen(port, () => {
-  console.log(`Server running on port ${port}...`);
+const PORT = process.env.PORT;
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}...`);
 });
