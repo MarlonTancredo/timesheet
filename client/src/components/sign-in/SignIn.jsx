@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import Axios from "axios";
 
@@ -7,7 +7,6 @@ import * as S from "./styles";
 
 import SignInButton from "../sign-in-button/SignInButton";
 import SignUpButton from "../sign-up-button/SignUpButton";
-import { useEffect } from "react";
 
 const usersPath = "http://localhost:3001/users";
 
@@ -63,7 +62,7 @@ const SignIn = () => {
   return (
     <F.Wrapper>
       <F.FormWrapper>
-        <F.Title>Sign In</F.Title>
+        <F.Title>Sign in</F.Title>
         <F.Break />
         <F.FieldsNames>E-mail</F.FieldsNames>
         <F.Input
