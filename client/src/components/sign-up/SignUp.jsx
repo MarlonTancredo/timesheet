@@ -1,16 +1,15 @@
 import { useEffect, useState } from "react";
 
+import Axios from "axios";
+
 import * as F from "../styles/forms/styles";
 
 import SignUpButton from "../sign-up-button/SignUpButton";
-
-import Axios from "axios";
 
 const usersPath = "http://localhost:3001/users";
 
 const SignUp = () => {
   const [users, setUsers] = useState([]);
-
   const [name, setName] = useState("");
   const [surname, setSurname] = useState("");
   const [email, setEmail] = useState("");
@@ -53,7 +52,7 @@ const SignUp = () => {
 
   useEffect(() => {
     getUsers();
-  });
+  }, []);
 
   const clearAllfields = () => {
     setName("");
