@@ -174,7 +174,11 @@ const SignUp = () => {
 
   return (
     <F.Wrapper>
-      <F.FormWrapper>
+      <F.FormWrapper
+        onSubmit={(e) => {
+          e.preventDefault();
+        }}
+      >
         <F.Title>Sign up</F.Title>
         <F.Break />
         <F.FieldsNames>Name</F.FieldsNames>
@@ -210,6 +214,7 @@ const SignUp = () => {
           name="confirmEmail"
           maxLength="50"
           type="email"
+          autoComplete="off"
           onChange={handleOnChange}
         />
         <F.FieldsNames>Password</F.FieldsNames>

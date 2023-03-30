@@ -60,7 +60,11 @@ const SignIn = () => {
 
   return (
     <F.Wrapper>
-      <F.FormWrapper>
+      <F.FormWrapper
+        onSubmit={(e) => {
+          e.preventDefault();
+        }}
+      >
         <F.Title>Sign in</F.Title>
         <F.Break />
         <F.FieldsNames>E-mail</F.FieldsNames>

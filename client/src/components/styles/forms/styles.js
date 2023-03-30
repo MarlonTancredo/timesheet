@@ -10,7 +10,7 @@ export const Wrapper = styled.div`
   margin-bottom: 3rem;
 `;
 
-export const FormWrapper = styled.div`
+export const FormWrapper = styled.form`
   width: 100%;
   display: flex;
   flex-direction: column;
