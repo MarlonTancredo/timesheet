@@ -18,42 +18,36 @@ const initialState = {
 };
 
 const reducer = (state, action) => {
-  if (action.type === "name") {
-    return { ...state, name: action.value };
+  switch (action.type) {
+    case "name":
+      return { ...state, name: action.value };
+    case "surname":
+      return { ...state, surname: action.value };
+    case "email":
+      return { ...state, email: action.value };
+    case "confirmEmail":
+      return { ...state, confirmEmail: action.value };
+    case "password":
+      return { ...state, password: action.value };
+    case "confirmPassword":
+      return { ...state, confirmPassword: action.value };
+    case "clear-all-fields":
+      return {
+        ...state,
+        name: "",
+        surname: "",
+        email: "",
+        confirmEmail: "",
+        password: "",
+        confirmPassword: "",
+      };
+    case "clear-email-fields":
+      return { ...state, email: "", confirmEmail: "" };
+    case "clear-password-fields":
+      return { ...state, password: "", confirmPassword: "" };
+    default:
+      return { ...state };
   }
-  if (action.type === "surname") {
-    return { ...state, surname: action.value };
-  }
-  if (action.type === "email") {
-    return { ...state, email: action.value };
-  }
-  if (action.type === "confirmEmail") {
-    return { ...state, confirmEmail: action.value };
-  }
-  if (action.type === "password") {
-    return { ...state, password: action.value };
-  }
-  if (action.type === "confirmPassword") {
-    return { ...state, confirmPassword: action.value };
-  }
-  if (action.type === "clear-all-fields") {
-    return {
-      ...state,
-      name: "",
-      surname: "",
-      email: "",
-      confirmEmail: "",
-      password: "",
-      confirmPassword: "",
-    };
-  }
-  if (action.type === "clear-email-fields") {
-    return { ...state, email: "", confirmEmail: "" };
-  }
-  if (action.type === "clear-password-fields") {
-    return { ...state, password: "", confirmPassword: "" };
-  }
-  return { ...state };
 };
 
 const SignUp = () => {
