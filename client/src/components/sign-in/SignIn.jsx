@@ -5,8 +5,7 @@ import Axios from "axios";
 import * as F from "../styles/forms/styles";
 import * as S from "./styles";
 
-import SignInButton from "../sign-in-button/SignInButton";
-import SignUpButton from "../sign-up-button/SignUpButton";
+import FormButton from "../form-button/FormButton";
 
 const usersPath = "http://localhost:3001/users";
 
@@ -80,10 +79,10 @@ const SignIn = () => {
         />
         <S.ButtonSection>
           <S.SignInSection>
-            <SignInButton name="Sign in" signInClick={handleSignButton} />
+            <FormButton name="Sign in" formButtonClick={handleSignButton} />
           </S.SignInSection>
           <S.SignUpSection>
-            <SignUpButton name="Sign up" />
+            <FormButton name="Sign up" />
           </S.SignUpSection>
         </S.ButtonSection>
       </F.FormWrapper>

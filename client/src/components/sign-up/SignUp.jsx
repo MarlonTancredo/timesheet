@@ -4,7 +4,7 @@ import Axios from "axios";
 
 import * as F from "../styles/forms/styles";
 
-import SignUpButton from "../sign-up-button/SignUpButton";
+import FormButton from "../form-button/FormButton";
 
 const usersPath = "http://localhost:3001/users";
 
@@ -157,7 +157,7 @@ const SignUp = () => {
           autoComplete="new-password"
           onChange={(e) => setConfirmPassword(e.target.value)}
         />
-        <SignUpButton signUpClick={handleAddUser} name="Sign up" />
+        <FormButton formButtonClick={handleAddUser} name="Sign up" />
       </F.FormWrapper>
     </F.Wrapper>
   );
