@@ -6,7 +6,7 @@ import * as F from "../styles/forms/styles";
 
 import FormButton from "../form-button/FormButton";
 
-const usersPath = "http://localhost:3001/users";
+const usersUrl = "http://localhost:3001/users";
 
 const initialState = {
   name: "",
@@ -57,12 +57,12 @@ const reducer = (state, action) => {
 };
 
 const SignUp = () => {
-  const [state, dispatch] = useReducer(reducer, initialState);
   const [users, setUsers] = useState([]);
+  const [state, dispatch] = useReducer(reducer, initialState);
 
   const getUsers = async () => {
     try {
-      const users = await Axios.get(usersPath);
+      const users = await Axios.get(usersUrl);
       const data = await users.data;
       setUsers(data);
     } catch (error) {
@@ -79,7 +79,7 @@ const SignUp = () => {
     confirmPassword
   ) => {
     try {
-      Axios.post(usersPath, {
+      Axios.post(usersUrl, {
         name: name,
         surname: surname,
         email: email,
