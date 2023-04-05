@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useReducer, useEffect, useState } from "react";
 
 import Axios from "axios";
 
@@ -9,10 +9,28 @@ import FormButton from "../form-button/FormButton";
 
 const usersPath = "http://localhost:3001/users";
 
+const initialState = {
+  email: "",
+  password: "",
+};
+
+const reducer = (state, action) => {
+  switch (action.type) {
+    case "email":
+      return { ...state, email: action.value };
+    case "password":
+      return { ...state, password: action.value };
+    case "clear-all-fields":
+      return { ...state, email: "", password: "" };
+    default:
+      return { ...state };
+  }
+};
+
 const SignIn = () => {
   const [users, setUsers] = useState([]);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+
+  const [state, dispatch] = useReducer(reducer, initialState);
 
   const getUsers = async () => {
     try {
@@ -29,11 +47,18 @@ const SignIn = () => {
   }, []);
 
   const clearAllField = () => {
-    setEmail("");
-    setPassword("");
+    const action = { type: "clear-all-fields" };
+    dispatch(action);
+  };
+
+  const handleOnChange = (e) => {
+    const action = { type: e.target.name, value: e.target.value };
+    dispatch(action);
   };
 
   const handleSignButton = () => {
+    const email = state.email;
+    const password = state.password;
     let answer = "";
     if (email === "") {
       alert("You did not enter your e-mail.");
@@ -69,15 +94,17 @@ const SignIn = () => {
         <F.Break />
         <F.FieldsNames>E-mail</F.FieldsNames>
         <F.Input
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          value={state.email}
+          name="email"
+          onChange={handleOnChange}
           type="email"
           autoComplete="email"
         />
         <F.FieldsNames>Password</F.FieldsNames>
         <F.Input
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          value={state.password}
+          name="password"
+          onChange={handleOnChange}
           type="password"
           autoComplete="current-password"
         />
