@@ -6,6 +6,7 @@ export const Wrapper = styled.nav`
   display: flex;
   flex-direction: row;
   background-color: ${colors.grey};
+  color: ${colors.fullGrey};
   width: 100%;
   height: auto;
   align-items: center;
