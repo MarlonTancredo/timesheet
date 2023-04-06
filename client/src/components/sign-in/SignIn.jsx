@@ -1,5 +1,7 @@
 import { useReducer, useEffect, useState } from "react";
 
+import { Link } from "react-router-dom";
+
 import Axios from "axios";
 
 import * as F from "../styles/forms/styles";
@@ -113,7 +115,9 @@ const SignIn = () => {
             <FormButton name="Sign in" formButtonClick={handleSignButton} />
           </S.SignInSection>
           <S.SignUpSection>
-            <FormButton name="Sign up" />
+            <Link to="/sign-up">
+              <FormButton name="Sign up" />
+            </Link>
           </S.SignUpSection>
         </S.ButtonSection>
       </F.FormWrapper>
