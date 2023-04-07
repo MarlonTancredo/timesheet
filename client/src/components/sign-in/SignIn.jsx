@@ -1,11 +1,10 @@
-import { useReducer, useEffect, useState } from "react";
-
-import { Link } from "react-router-dom";
+import * as F from "../styles/forms/styles";
+import * as S from "./styles";
 
 import Axios from "axios";
 
-import * as F from "../styles/forms/styles";
-import * as S from "./styles";
+import { useReducer, useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 import FormButton from "../form-button/FormButton";
 

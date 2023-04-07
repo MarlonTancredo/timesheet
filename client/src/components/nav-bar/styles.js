@@ -12,6 +12,20 @@ export const Wrapper = styled.nav`
   align-items: center;
 `;
 
+export const LogoSection = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+`;
+
+export const Title = styled.h2``;
+
+export const PagesSection = styled.div`
+  display: flex;
+  flex-direction: row;
+  margin-left: auto;
+`;
+
 export const Links = styled.ul`
   display: flex;
   flex-direction: row;
