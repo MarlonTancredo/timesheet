@@ -5,3 +5,7 @@ export const AppWrapper = styled.div`
   flex-direction: column;
   align-items: center;
 `;
+
+export const Content = styled.div`
+  margin-top: 3rem;
+`;
