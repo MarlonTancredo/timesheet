@@ -32,7 +32,7 @@ export const Links = styled.ul`
   list-style: none;
 `;
 
-export const Link = styled.li`
+export const LinkStyled = styled.li`
   a {
     margin-right: 2rem;
     text-decoration: transparent;

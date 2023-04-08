@@ -10,15 +10,15 @@ const Navbar = () => {
       </S.LogoSection>
       <S.PagesSection>
         <S.Links>
-          <S.Link>
+          <S.LinkStyled>
             <NavLink to="/">Home</NavLink>
-          </S.Link>
-          <S.Link>
+          </S.LinkStyled>
+          <S.LinkStyled>
             <NavLink to="/sign-in">Sign in</NavLink>
-          </S.Link>
-          <S.Link>
+          </S.LinkStyled>
+          <S.LinkStyled>
             <NavLink to="/sign-up">Sign up</NavLink>
-          </S.Link>
+          </S.LinkStyled>
         </S.Links>
       </S.PagesSection>
     </S.Wrapper>
