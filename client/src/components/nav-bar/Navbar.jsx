@@ -1,3 +1,4 @@
+import * as F from "../styles/forms/styles";
 import * as S from "./styles";
 
 import { NavLink } from "react-router-dom";
@@ -10,15 +11,15 @@ const Navbar = () => {
       </S.LogoSection>
       <S.PagesSection>
         <S.Links>
-          <S.LinkStyled>
+          <F.StyledLink>
             <NavLink to="/">Home</NavLink>
-          </S.LinkStyled>
-          <S.LinkStyled>
+          </F.StyledLink>
+          <F.StyledLink>
             <NavLink to="/sign-in">Sign in</NavLink>
-          </S.LinkStyled>
-          <S.LinkStyled>
+          </F.StyledLink>
+          <F.StyledLink>
             <NavLink to="/sign-up">Sign up</NavLink>
-          </S.LinkStyled>
+          </F.StyledLink>
         </S.Links>
       </S.PagesSection>
     </S.Wrapper>

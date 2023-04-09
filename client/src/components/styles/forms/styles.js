@@ -37,3 +37,16 @@ export const Input = styled.input`
   margin-bottom: 1rem;
   border: ${colors.grey} solid 1px;
 `;
+
+export const StyledLink = styled.div`
+  a {
+    margin-right: 2rem;
+    text-decoration: transparent;
+    color: ${colors.fullGrey};
+    cursor: pointer;
+    transition: 0.6s;
+  }
+  a:hover {
+    text-decoration: underline;
+  }
+`;

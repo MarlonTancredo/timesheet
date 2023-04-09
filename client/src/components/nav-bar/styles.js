@@ -31,16 +31,3 @@ export const Links = styled.ul`
   flex-direction: row;
   list-style: none;
 `;
-
-export const LinkStyled = styled.li`
-  a {
-    margin-right: 2rem;
-    text-decoration: transparent;
-    color: ${colors.fullGrey};
-    cursor: pointer;
-    transition: 1s;
-  }
-  a:hover {
-    text-decoration: underline;
-  }
-`;
