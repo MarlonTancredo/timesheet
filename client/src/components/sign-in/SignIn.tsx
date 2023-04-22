@@ -16,8 +16,8 @@ type InitialState = {
 };
 
 type State = {
-  email: string | never | undefined;
-  password: string | never | undefined;
+  email?: string;
+  password?: string;
 };
 
 type Action = {
@@ -82,8 +82,6 @@ const SignIn = () => {
   };
 
   const handleSignButton = () => {
-    const email = state.email;
-    const password = state.password;
     let answer = "";
     if (email === "") {
       alert("You did not enter your e-mail.");
