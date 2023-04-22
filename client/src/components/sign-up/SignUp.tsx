@@ -99,14 +99,14 @@ const SignUp = () => {
     }
   };
 
-  const saveUser = (
-    name: string | undefined,
-    surname: string | undefined,
-    email: string | undefined,
-    confirmEmail: string | undefined,
-    password: string | undefined,
-    confirmPassword: string | undefined
-  ) => {
+  const saveUser = ({
+    name,
+    surname,
+    email,
+    confirmEmail,
+    password,
+    confirmPassword,
+  }: Users) => {
     try {
       Axios.post(usersUrl, {
         name: name,
@@ -189,7 +189,7 @@ const SignUp = () => {
       }
     }
 
-    saveUser(name, surname, email, confirmEmail, password, confirmPassword);
+    saveUser({ name, surname, email, confirmEmail, password, confirmPassword });
 
     clearAllFields();
   };
