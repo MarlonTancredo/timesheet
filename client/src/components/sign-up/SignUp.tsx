@@ -8,7 +8,39 @@ import FormButton from "../form-button/FormButton";
 
 const usersUrl = "http://localhost:3001/users";
 
-const initialState = {
+type InitialState = {
+  name: string;
+  surname: string;
+  email: string;
+  confirmEmail: string;
+  password: string;
+  confirmPassword: string;
+};
+
+type State = {
+  name?: string;
+  surname?: string;
+  email?: string;
+  confirmEmail?: string;
+  password?: string;
+  confirmPassword?: string;
+};
+
+type Action = {
+  type?: string;
+  value?: string;
+};
+
+type Users = {
+  name?: string;
+  surname?: string;
+  email?: string;
+  confirmEmail?: string;
+  password?: string;
+  confirmPassword?: string;
+};
+
+const initialState: InitialState = {
   name: "",
   surname: "",
   email: "",
@@ -17,20 +49,21 @@ const initialState = {
   confirmPassword: "",
 };
 
-const reducer = (state, action) => {
-  switch (action.type) {
+const reducer = (state: State, action: Action): State => {
+  const { type, value } = action;
+  switch (type) {
     case "name":
-      return { ...state, name: action.value };
+      return { ...state, name: value };
     case "surname":
-      return { ...state, surname: action.value };
+      return { ...state, surname: value };
     case "email":
-      return { ...state, email: action.value };
+      return { ...state, email: value };
     case "confirmEmail":
-      return { ...state, confirmEmail: action.value };
+      return { ...state, confirmEmail: value };
     case "password":
-      return { ...state, password: action.value };
+      return { ...state, password: value };
     case "confirmPassword":
-      return { ...state, confirmPassword: action.value };
+      return { ...state, confirmPassword: value };
     case "clear-all-fields":
       return {
         ...state,
@@ -51,8 +84,10 @@ const reducer = (state, action) => {
 };
 
 const SignUp = () => {
-  const [users, setUsers] = useState([]);
   const [state, dispatch] = useReducer(reducer, initialState);
+  const { name, surname, email, confirmEmail, password, confirmPassword } =
+    state;
+  const [users, setUsers] = useState<Users[]>([]);
 
   const getUsers = async () => {
     try {
@@ -65,12 +100,12 @@ const SignUp = () => {
   };
 
   const saveUser = (
-    name,
-    surname,
-    email,
-    confirmEmail,
-    password,
-    confirmPassword
+    name: string | undefined,
+    surname: string | undefined,
+    email: string | undefined,
+    confirmEmail: string | undefined,
+    password: string | undefined,
+    confirmPassword: string | undefined
   ) => {
     try {
       Axios.post(usersUrl, {
@@ -112,7 +147,7 @@ const SignUp = () => {
     dispatch(action);
   };
 
-  const handleOnChange = (e) => {
+  const handleOnChange = (e: { target: { name: string; value: string } }) => {
     const action = {
       type: e.target.name,
       value: e.target.value,
@@ -121,13 +156,6 @@ const SignUp = () => {
   };
 
   const handleAddUser = () => {
-    const name = state.name;
-    const surname = state.surname;
-    const email = state.email;
-    const confirmEmail = state.confirmEmail;
-    const password = state.password;
-    const confirmPassword = state.confirmPassword;
-
     if (
       name === "" ||
       surname === "" ||
@@ -177,36 +205,36 @@ const SignUp = () => {
         <F.Break />
         <F.FieldsNames>Name</F.FieldsNames>
         <F.Input
-          value={state.name}
+          value={name}
           name="name"
-          maxLength="30"
+          max="30"
           type="text"
           autoComplete="given-name"
           onChange={handleOnChange}
         />
         <F.FieldsNames>Last Name</F.FieldsNames>
         <F.Input
-          value={state.surname}
+          value={surname}
           name="surname"
-          maxLength="30"
+          max="30"
           type="text"
           autoComplete="family-name"
           onChange={handleOnChange}
         />
         <F.FieldsNames>E-mail</F.FieldsNames>
         <F.Input
-          value={state.email}
+          value={email}
           name="email"
-          maxLength="50"
+          max="50"
           type="email"
           autoComplete="email"
           onChange={handleOnChange}
         />
         <F.FieldsNames>Confirm E-mail</F.FieldsNames>
         <F.Input
-          value={state.confirmEmail}
+          value={confirmEmail}
           name="confirmEmail"
-          maxLength="50"
+          max="50"
           type="email"
           autoComplete="off"
           onChange={handleOnChange}
@@ -215,16 +243,16 @@ const SignUp = () => {
         <F.Input
           value={state.password}
           name="password"
-          maxLength="30"
+          max="30"
           type="password"
           autoComplete="new-password"
           onChange={handleOnChange}
         />
         <F.FieldsNames>Confirm Password</F.FieldsNames>
         <F.Input
-          value={state.confirmPassword}
+          value={confirmPassword}
           name="confirmPassword"
-          maxLength="30"
+          max="30"
           type="password"
           autoComplete="new-password"
           onChange={handleOnChange}

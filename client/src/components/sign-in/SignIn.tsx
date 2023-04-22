@@ -10,17 +10,35 @@ import FormButton from "../form-button/FormButton";
 
 const usersPath = "http://localhost:3001/users";
 
-const initialState = {
-  email: "",
-  password: "",
+type InitialState = {
+  email: string;
+  password: string;
 };
 
-const reducer = (state, action) => {
-  switch (action.type) {
+type State = {
+  email: string | never | undefined;
+  password: string | never | undefined;
+};
+
+type Action = {
+  type?: string;
+  value?: string;
+};
+
+type Users = {
+  email?: string;
+  password?: string;
+  name?: string;
+  surname?: string;
+};
+
+const reducer = (state: State, action: Action): State => {
+  const { type, value } = action;
+  switch (type) {
     case "email":
-      return { ...state, email: action.value };
+      return { ...state, email: value };
     case "password":
-      return { ...state, password: action.value };
+      return { ...state, password: value };
     case "clear-all-fields":
       return { ...state, email: "", password: "" };
     default:
@@ -28,10 +46,16 @@ const reducer = (state, action) => {
   }
 };
 
-const SignIn = () => {
-  const [users, setUsers] = useState([]);
+const initialState: InitialState = {
+  email: "",
+  password: "",
+};
 
+const SignIn = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
+  const { email, password } = state;
+
+  const [users, setUsers] = useState<Users[]>([]);
 
   const getUsers = async () => {
     try {
@@ -52,7 +76,7 @@ const SignIn = () => {
     dispatch(action);
   };
 
-  const handleOnChange = (e) => {
+  const handleOnChange = (e: { target: { name: any; value: any } }) => {
     const action = { type: e.target.name, value: e.target.value };
     dispatch(action);
   };
@@ -80,7 +104,6 @@ const SignIn = () => {
         clearAllField();
       }
     }
-
     alert(answer);
   };
 
@@ -95,7 +118,7 @@ const SignIn = () => {
         <F.Break />
         <F.FieldsNames>E-mail</F.FieldsNames>
         <F.Input
-          value={state.email}
+          value={email}
           name="email"
           onChange={handleOnChange}
           type="email"
@@ -103,7 +126,7 @@ const SignIn = () => {
         />
         <F.FieldsNames>Password</F.FieldsNames>
         <F.Input
-          value={state.password}
+          value={password}
           name="password"
           onChange={handleOnChange}
           type="password"

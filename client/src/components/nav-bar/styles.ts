@@ -16,6 +16,7 @@ export const LogoSection = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: left;
+  margin-left: 1.6rem;
 `;
 
 export const Title = styled.h2``;

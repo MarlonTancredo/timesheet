@@ -1,6 +1,11 @@
 import * as F from "../styles/buttons/styles";
 
-const FormButton = ({ name, formButtonClick }) => {
+type ButtonProps = {
+  name?: string;
+  formButtonClick?: () => void;
+};
+
+const FormButton = ({ name, formButtonClick }: ButtonProps) => {
   return (
     <F.FormButtomWrapper>
       <F.FormButton onClick={formButtonClick}>{name}</F.FormButton>
