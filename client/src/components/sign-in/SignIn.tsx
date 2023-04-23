@@ -118,17 +118,19 @@ const SignIn = () => {
         <F.Input
           value={email}
           name="email"
-          onChange={handleOnChange}
-          type="email"
+          type="text"
+          maxLength={30}
           autoComplete="email"
+          onChange={handleOnChange}
         />
         <F.FieldsNames>Password</F.FieldsNames>
         <F.Input
           value={password}
           name="password"
-          onChange={handleOnChange}
           type="password"
+          maxLength={30}
           autoComplete="current-password"
+          onChange={handleOnChange}
         />
         <S.ButtonSection>
           <S.SignInSection>

@@ -13,8 +13,8 @@ export const FormButton = styled.button`
   border: 1px ${colors.grey} solid;
   border-radius: 2px;
   cursor: pointer;
+  transition: 0.6s;
   &:hover {
-    transition: 0.6s;
     background-color: ${colors.grey};
   }
 `;

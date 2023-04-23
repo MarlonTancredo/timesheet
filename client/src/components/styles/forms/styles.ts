@@ -33,6 +33,7 @@ export const FieldsNames = styled.label`
 `;
 
 export const Input = styled.input`
+  outline: none;
   height: 3rem;
   margin-bottom: 1rem;
   border: ${colors.grey} solid 1px;

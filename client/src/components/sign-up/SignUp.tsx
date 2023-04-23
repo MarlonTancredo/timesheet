@@ -207,8 +207,8 @@ const SignUp = () => {
         <F.Input
           value={name}
           name="name"
-          max="30"
           type="text"
+          maxLength={30}
           autoComplete="given-name"
           onChange={handleOnChange}
         />
@@ -216,8 +216,8 @@ const SignUp = () => {
         <F.Input
           value={surname}
           name="surname"
-          max="30"
           type="text"
+          maxLength={30}
           autoComplete="family-name"
           onChange={handleOnChange}
         />
@@ -225,8 +225,8 @@ const SignUp = () => {
         <F.Input
           value={email}
           name="email"
-          max="50"
-          type="email"
+          type="text"
+          maxLength={60}
           autoComplete="email"
           onChange={handleOnChange}
         />
@@ -234,8 +234,8 @@ const SignUp = () => {
         <F.Input
           value={confirmEmail}
           name="confirmEmail"
-          max="50"
-          type="email"
+          type="text"
+          maxLength={60}
           autoComplete="off"
           onChange={handleOnChange}
         />
@@ -243,8 +243,8 @@ const SignUp = () => {
         <F.Input
           value={state.password}
           name="password"
-          max="30"
           type="password"
+          maxLength={60}
           autoComplete="new-password"
           onChange={handleOnChange}
         />
@@ -252,8 +252,8 @@ const SignUp = () => {
         <F.Input
           value={confirmPassword}
           name="confirmPassword"
-          max="30"
           type="password"
+          maxLength={60}
           autoComplete="new-password"
           onChange={handleOnChange}
         />
