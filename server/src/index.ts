@@ -1,7 +1,7 @@
-const express = require("express");
-const mongoose = require("mongoose");
-const cors = require("cors");
-const UserModel = require("./models/User");
+import express, { Response, Request } from "express";
+import mongoose from "mongoose";
+import cors from "cors";
+import UserModel from "./models/User";
 
 require("dotenv").config();
 
@@ -18,9 +18,10 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-const DBPORT = process.env.DBPORT;
+const DB_PORT = process.env.DB_PORT;
+console.log("test", DB_PORT);
 mongoose
-  .connect(DBPORT)
+  .connect(DB_PORT)
   .then(() => {
     console.log("Database conected!");
   })
@@ -29,50 +30,46 @@ mongoose
   });
 
 const addUser = () => {
-  app.post(
-    "/users",
-    async (req: { body: User }, res: { send: (message: string) => void }) => {
-      const name = req.body.name;
-      const surname = req.body.surname;
-      const email = req.body.email;
-      const confirmEmail = req.body.confirmEmail;
-      const password = req.body.password;
-      const confirmPassword = req.body.confirmPassword;
+  app.post("/users", async (req: Request, res: Response) => {
+    const {
+      name,
+      surname,
+      email,
+      confirmEmail,
+      password,
+      confirmPassword,
+    }: User = req.body;
 
-      const user = new UserModel({
-        name: name,
-        surname: surname,
-        email: email,
-        confirmEmail: confirmEmail,
-        password: password,
-        confirmPassword: confirmPassword,
-      });
-      try {
-        await user.save();
-        res.send("Data inserted!");
-      } catch (err) {
-        console.log("Error: " + err);
-      }
+    const user = new UserModel({
+      name: name,
+      surname: surname,
+      email: email,
+      confirmEmail: confirmEmail,
+      password: password,
+      confirmPassword: confirmPassword,
+    });
+    try {
+      await user.save();
+      res.send("Data inserted!");
+    } catch (err) {
+      console.log("Error: " + err);
     }
-  );
+  });
 };
 
 const getAllUsers = () => {
-  app.get(
-    "/users",
-    async (req: { body: User }, res: { send: (users: User) => void }) => {
-      try {
-        const users: User = await UserModel.find({});
-        res.send(users);
-      } catch (err) {
-        console.log(err);
-      }
+  app.get("/users", async (req, res: Response) => {
+    try {
+      const users = await UserModel.find({});
+      res.send(users);
+    } catch (err) {
+      console.log(err);
     }
-  );
+  });
 };
 
 const deleteUser = () => {
-  app.delete("/users/:id", async (req: { params: { id: number } }) => {
+  app.delete("/users/:id", async (req: Request, res) => {
     const id = req.params.id;
 
     try {
@@ -84,21 +81,15 @@ const deleteUser = () => {
 };
 
 const updateUser = () => {
-  app.put(
-    "/users/:id",
-    async (
-      req: { params: { id: number }; body: { name: string } },
-      res: string
-    ) => {
-      const id = req.params.id;
-      const name = req.body.name;
-      try {
-        await UserModel.findByIdAndUpdate(id, { name: name });
-      } catch (err) {
-        console.log("Error: ", err);
-      }
+  app.put("/users/:id", async (req: Request, res) => {
+    const id = req.params.id;
+    const name = req.body.name;
+    try {
+      await UserModel.findByIdAndUpdate(id, { name: name });
+    } catch (err) {
+      console.log("Error: ", err);
     }
-  );
+  });
 };
 
 addUser();

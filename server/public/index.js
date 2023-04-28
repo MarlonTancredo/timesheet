@@ -35,17 +35,22 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var express = require("express");
-var mongoose = require("mongoose");
-var cors = require("cors");
-var UserModel = require("./models/User");
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var express_1 = __importDefault(require("express"));
+var mongoose_1 = __importDefault(require("mongoose"));
+var cors_1 = __importDefault(require("cors"));
+var User_1 = __importDefault(require("./models/User"));
 require("dotenv").config();
-var app = express();
-app.use(express.json());
-app.use(cors());
-var DBPORT = process.env.DBPORT;
-mongoose
-    .connect(DBPORT)
+var app = (0, express_1.default)();
+app.use(express_1.default.json());
+app.use((0, cors_1.default)());
+var DB_PORT = process.env.DB_PORT;
+console.log("test", DB_PORT);
+mongoose_1.default
+    .connect(DB_PORT)
     .then(function () {
     console.log("Database conected!");
 })
@@ -54,17 +59,12 @@ mongoose
 });
 var addUser = function () {
     app.post("/users", function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-        var name, surname, email, confirmEmail, password, confirmPassword, user, err_1;
-        return __generator(this, function (_a) {
-            switch (_a.label) {
+        var _a, name, surname, email, confirmEmail, password, confirmPassword, user, err_1;
+        return __generator(this, function (_b) {
+            switch (_b.label) {
                 case 0:
-                    name = req.body.name;
-                    surname = req.body.surname;
-                    email = req.body.email;
-                    confirmEmail = req.body.confirmEmail;
-                    password = req.body.password;
-                    confirmPassword = req.body.confirmPassword;
-                    user = new UserModel({
+                    _a = req.body, name = _a.name, surname = _a.surname, email = _a.email, confirmEmail = _a.confirmEmail, password = _a.password, confirmPassword = _a.confirmPassword;
+                    user = new User_1.default({
                         name: name,
                         surname: surname,
                         email: email,
@@ -72,16 +72,16 @@ var addUser = function () {
                         password: password,
                         confirmPassword: confirmPassword,
                     });
-                    _a.label = 1;
+                    _b.label = 1;
                 case 1:
-                    _a.trys.push([1, 3, , 4]);
+                    _b.trys.push([1, 3, , 4]);
                     return [4 /*yield*/, user.save()];
                 case 2:
-                    _a.sent();
+                    _b.sent();
                     res.send("Data inserted!");
                     return [3 /*break*/, 4];
                 case 3:
-                    err_1 = _a.sent();
+                    err_1 = _b.sent();
                     console.log("Error: " + err_1);
                     return [3 /*break*/, 4];
                 case 4: return [2 /*return*/];
@@ -96,7 +96,7 @@ var getAllUsers = function () {
             switch (_a.label) {
                 case 0:
                     _a.trys.push([0, 2, , 3]);
-                    return [4 /*yield*/, UserModel.find({})];
+                    return [4 /*yield*/, User_1.default.find({})];
                 case 1:
                     users = _a.sent();
                     res.send(users);
@@ -111,7 +111,7 @@ var getAllUsers = function () {
     }); });
 };
 var deleteUser = function () {
-    app.delete("/users/:id", function (req) { return __awaiter(void 0, void 0, void 0, function () {
+    app.delete("/users/:id", function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
         var id, err_3;
         return __generator(this, function (_a) {
             switch (_a.label) {
@@ -120,7 +120,7 @@ var deleteUser = function () {
                     _a.label = 1;
                 case 1:
                     _a.trys.push([1, 3, , 4]);
-                    return [4 /*yield*/, UserModel.deleteOne({ _id: id })];
+                    return [4 /*yield*/, User_1.default.deleteOne({ _id: id })];
                 case 2:
                     _a.sent();
                     return [3 /*break*/, 4];
@@ -144,7 +144,7 @@ var updateUser = function () {
                     _a.label = 1;
                 case 1:
                     _a.trys.push([1, 3, , 4]);
-                    return [4 /*yield*/, UserModel.findByIdAndUpdate(id, { name: name })];
+                    return [4 /*yield*/, User_1.default.findByIdAndUpdate(id, { name: name })];
                 case 2:
                     _a.sent();
                     return [3 /*break*/, 4];
