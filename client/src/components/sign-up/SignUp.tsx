@@ -1,12 +1,18 @@
+import * as F from "../styles/forms/styles";
+import FormButton from "../form-button/FormButton";
+
+import {
+  signupSuccess,
+  fillFields,
+  equalPasswords,
+  equalEmail,
+  emailExistent,
+  noDataBase,
+} from "../alerts/alerts";
+
 import { useReducer, useEffect, useState } from "react";
 
 import Axios from "axios";
-
-import * as F from "../styles/forms/styles";
-
-import FormButton from "../form-button/FormButton";
-
-const usersUrl = "http://localhost:3001/users";
 
 type InitialState = {
   name: string;
@@ -48,6 +54,8 @@ const initialState: InitialState = {
   password: "",
   confirmPassword: "",
 };
+
+const usersUrl = "http://localhost:3001/users";
 
 const reducer = (state: State, action: Action): State => {
   const { type, value } = action;
@@ -95,7 +103,8 @@ const SignUp = () => {
       const data = await users.data;
       setUsers(data);
     } catch (error) {
-      console.log("Error while trying to fecth data!", error);
+      console.log(error);
+      noDataBase();
     }
   };
 
@@ -116,9 +125,9 @@ const SignUp = () => {
         password: password,
         confirmPassword: confirmPassword,
       });
-      alert("Data entered!");
+      signupSuccess();
     } catch (err) {
-      console.log(err);
+      console.log("tes", err);
     }
   };
 
@@ -164,26 +173,26 @@ const SignUp = () => {
       password === "" ||
       confirmPassword === ""
     ) {
-      alert("You must to fill all fields!");
-      clearAllFields();
+      equalPasswords();
+      fillFields();
       return;
     }
 
     if (password !== confirmPassword) {
-      alert("Passwords must to be equal!");
+      equalPasswords();
       clearPasswordFields();
       return;
     }
 
     if (email !== confirmEmail) {
-      alert("E-mails must to be equals!");
+      equalEmail();
       clearEmailFields();
       return;
     }
 
     for (let i = 0; i < users.length; i++) {
       if (email === users[i].email) {
-        alert("This e-mail already exists, please enter a different one!");
+        emailExistent();
         clearEmailFields();
         return;
       }

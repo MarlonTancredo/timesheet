@@ -48,7 +48,6 @@ var app = (0, express_1.default)();
 app.use(express_1.default.json());
 app.use((0, cors_1.default)());
 var DB_PORT = process.env.DB_PORT;
-console.log("test", DB_PORT);
 mongoose_1.default
     .connect(DB_PORT)
     .then(function () {
@@ -57,110 +56,99 @@ mongoose_1.default
     .catch(function (err) {
     console.log("Error: " + err);
 });
-var addUser = function () {
-    app.post("/users", function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-        var _a, name, surname, email, confirmEmail, password, confirmPassword, user, err_1;
-        return __generator(this, function (_b) {
-            switch (_b.label) {
-                case 0:
-                    _a = req.body, name = _a.name, surname = _a.surname, email = _a.email, confirmEmail = _a.confirmEmail, password = _a.password, confirmPassword = _a.confirmPassword;
-                    user = new User_1.default({
-                        name: name,
-                        surname: surname,
-                        email: email,
-                        confirmEmail: confirmEmail,
-                        password: password,
-                        confirmPassword: confirmPassword,
-                    });
-                    _b.label = 1;
-                case 1:
-                    _b.trys.push([1, 3, , 4]);
-                    return [4 /*yield*/, user.save()];
-                case 2:
-                    _b.sent();
-                    res.send("Data inserted!");
-                    return [3 /*break*/, 4];
-                case 3:
-                    err_1 = _b.sent();
-                    console.log("Error: " + err_1);
-                    return [3 /*break*/, 4];
-                case 4: return [2 /*return*/];
-            }
-        });
-    }); });
-};
-var getAllUsers = function () {
-    app.get("/users", function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-        var users, err_2;
-        return __generator(this, function (_a) {
-            switch (_a.label) {
-                case 0:
-                    _a.trys.push([0, 2, , 3]);
-                    return [4 /*yield*/, User_1.default.find({})];
-                case 1:
-                    users = _a.sent();
-                    res.send(users);
-                    return [3 /*break*/, 3];
-                case 2:
-                    err_2 = _a.sent();
-                    console.log(err_2);
-                    return [3 /*break*/, 3];
-                case 3: return [2 /*return*/];
-            }
-        });
-    }); });
-};
-var deleteUser = function () {
-    app.delete("/users/:id", function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-        var id, err_3;
-        return __generator(this, function (_a) {
-            switch (_a.label) {
-                case 0:
-                    id = req.params.id;
-                    _a.label = 1;
-                case 1:
-                    _a.trys.push([1, 3, , 4]);
-                    return [4 /*yield*/, User_1.default.deleteOne({ _id: id })];
-                case 2:
-                    _a.sent();
-                    return [3 /*break*/, 4];
-                case 3:
-                    err_3 = _a.sent();
-                    console.log("error", err_3);
-                    return [3 /*break*/, 4];
-                case 4: return [2 /*return*/];
-            }
-        });
-    }); });
-};
-var updateUser = function () {
-    app.put("/users/:id", function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-        var id, name, err_4;
-        return __generator(this, function (_a) {
-            switch (_a.label) {
-                case 0:
-                    id = req.params.id;
-                    name = req.body.name;
-                    _a.label = 1;
-                case 1:
-                    _a.trys.push([1, 3, , 4]);
-                    return [4 /*yield*/, User_1.default.findByIdAndUpdate(id, { name: name })];
-                case 2:
-                    _a.sent();
-                    return [3 /*break*/, 4];
-                case 3:
-                    err_4 = _a.sent();
-                    console.log("Error: ", err_4);
-                    return [3 /*break*/, 4];
-                case 4: return [2 /*return*/];
-            }
-        });
-    }); });
-};
-addUser();
-getAllUsers();
-deleteUser();
-updateUser();
+app.post("/users", function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var _a, name, surname, email, confirmEmail, password, confirmPassword, user, err_1;
+    return __generator(this, function (_b) {
+        switch (_b.label) {
+            case 0:
+                _a = req.body, name = _a.name, surname = _a.surname, email = _a.email, confirmEmail = _a.confirmEmail, password = _a.password, confirmPassword = _a.confirmPassword;
+                user = new User_1.default({
+                    name: name,
+                    surname: surname,
+                    email: email,
+                    confirmEmail: confirmEmail,
+                    password: password,
+                    confirmPassword: confirmPassword,
+                });
+                _b.label = 1;
+            case 1:
+                _b.trys.push([1, 3, , 4]);
+                return [4 /*yield*/, user.save()];
+            case 2:
+                _b.sent();
+                res.send("Data inserted!");
+                return [3 /*break*/, 4];
+            case 3:
+                err_1 = _b.sent();
+                res.status(400).send("Sorry, cant find that");
+                console.log("Error: " + err_1);
+                return [3 /*break*/, 4];
+            case 4: return [2 /*return*/];
+        }
+    });
+}); });
+app.get("/users", function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var users, err_2;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0:
+                _a.trys.push([0, 2, , 3]);
+                return [4 /*yield*/, User_1.default.find({})];
+            case 1:
+                users = _a.sent();
+                res.send(users);
+                return [3 /*break*/, 3];
+            case 2:
+                err_2 = _a.sent();
+                console.log(err_2);
+                return [3 /*break*/, 3];
+            case 3: return [2 /*return*/];
+        }
+    });
+}); });
+app.delete("/users/:id", function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var id, err_3;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0:
+                id = req.params.id;
+                _a.label = 1;
+            case 1:
+                _a.trys.push([1, 3, , 4]);
+                return [4 /*yield*/, User_1.default.deleteOne({ _id: id })];
+            case 2:
+                _a.sent();
+                return [3 /*break*/, 4];
+            case 3:
+                err_3 = _a.sent();
+                console.log("error", err_3);
+                return [3 /*break*/, 4];
+            case 4: return [2 /*return*/];
+        }
+    });
+}); });
+app.put("/users/:id", function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var id, name, err_4;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0:
+                id = req.params.id;
+                name = req.body.name.name;
+                _a.label = 1;
+            case 1:
+                _a.trys.push([1, 3, , 4]);
+                return [4 /*yield*/, User_1.default.findByIdAndUpdate(id, { name: name })];
+            case 2:
+                _a.sent();
+                return [3 /*break*/, 4];
+            case 3:
+                err_4 = _a.sent();
+                console.log("Error: ", err_4);
+                return [3 /*break*/, 4];
+            case 4: return [2 /*return*/];
+        }
+    });
+}); });
 var PORT = process.env.PORT;
 app.listen(PORT, function () {
     console.log("Server running on port ".concat(PORT, "..."));

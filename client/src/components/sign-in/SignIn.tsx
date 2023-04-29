@@ -1,14 +1,19 @@
 import * as F from "../styles/forms/styles";
 import * as S from "./styles";
 
+import {
+  succesAlert,
+  fillFields,
+  wrongLogin,
+  noDataBase,
+} from "../alerts/alerts";
+
+import FormButton from "../form-button/FormButton";
+
 import Axios from "axios";
 
 import { useReducer, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-
-import FormButton from "../form-button/FormButton";
-
-const usersPath = "http://localhost:3001/users";
 
 type InitialState = {
   email: string;
@@ -51,6 +56,8 @@ const initialState: InitialState = {
   password: "",
 };
 
+const usersPath = "http://localhost:3001/users";
+
 const SignIn = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
   const { email, password } = state;
@@ -63,7 +70,8 @@ const SignIn = () => {
       const data = await users.data;
       setUsers(data);
     } catch (error) {
-      console.log(error, "Error while fetching user!");
+      console.log(error);
+      noDataBase();
     }
   };
 
@@ -82,27 +90,25 @@ const SignIn = () => {
   };
 
   const handleSignButton = () => {
-    let answer = "";
     if (email === "") {
-      alert("You did not enter your e-mail.");
+      fillFields();
       return;
     }
 
     if (password === "") {
-      alert("You did not enter your password.");
+      fillFields();
       return;
     }
 
     for (let i = 0; i < users.length; i++) {
       if (email === users[i].email && password === users[i].password) {
-        answer = `Welcome! ${users[i].name} ${users[i].surname}`;
+        succesAlert();
         break;
       } else {
-        answer = "Your e-mail and password doesn't match";
+        wrongLogin();
         clearAllField();
       }
     }
-    alert(answer);
   };
 
   return (

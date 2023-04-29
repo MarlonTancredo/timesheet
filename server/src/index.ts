@@ -19,7 +19,7 @@ app.use(express.json());
 app.use(cors());
 
 const DB_PORT = process.env.DB_PORT;
-console.log("test", DB_PORT);
+
 mongoose
   .connect(DB_PORT)
   .then(() => {
@@ -29,73 +29,61 @@ mongoose
     console.log("Error: " + err);
   });
 
-const addUser = () => {
-  app.post("/users", async (req: Request, res: Response) => {
-    const {
-      name,
-      surname,
-      email,
-      confirmEmail,
-      password,
-      confirmPassword,
-    }: User = req.body;
+app.post("/users", async (req: Request, res: Response) => {
+  const {
+    name,
+    surname,
+    email,
+    confirmEmail,
+    password,
+    confirmPassword,
+  }: User = req.body;
 
-    const user = new UserModel({
-      name: name,
-      surname: surname,
-      email: email,
-      confirmEmail: confirmEmail,
-      password: password,
-      confirmPassword: confirmPassword,
-    });
-    try {
-      await user.save();
-      res.send("Data inserted!");
-    } catch (err) {
-      console.log("Error: " + err);
-    }
+  const user = new UserModel({
+    name: name,
+    surname: surname,
+    email: email,
+    confirmEmail: confirmEmail,
+    password: password,
+    confirmPassword: confirmPassword,
   });
-};
+  try {
+    await user.save();
+    res.send("Data inserted!");
+  } catch (err) {
+    res.status(400).send("Sorry, cant find that");
+    console.log("Error: " + err);
+  }
+});
 
-const getAllUsers = () => {
-  app.get("/users", async (req, res: Response) => {
-    try {
-      const users = await UserModel.find({});
-      res.send(users);
-    } catch (err) {
-      console.log(err);
-    }
-  });
-};
+app.get("/users", async (req, res: Response) => {
+  try {
+    const users = await UserModel.find({});
+    res.send(users);
+  } catch (err) {
+    console.log(err);
+  }
+});
 
-const deleteUser = () => {
-  app.delete("/users/:id", async (req: Request, res) => {
-    const id = req.params.id;
+app.delete("/users/:id", async (req: Request, res) => {
+  const id = req.params.id;
 
-    try {
-      await UserModel.deleteOne({ _id: id });
-    } catch (err) {
-      console.log("error", err);
-    }
-  });
-};
+  try {
+    await UserModel.deleteOne({ _id: id });
+  } catch (err) {
+    console.log("error", err);
+  }
+});
 
-const updateUser = () => {
-  app.put("/users/:id", async (req: Request, res) => {
-    const id = req.params.id;
-    const name = req.body.name;
-    try {
-      await UserModel.findByIdAndUpdate(id, { name: name });
-    } catch (err) {
-      console.log("Error: ", err);
-    }
-  });
-};
-
-addUser();
-getAllUsers();
-deleteUser();
-updateUser();
+app.put("/users/:id", async (req: Request, res) => {
+  const id = req.params.id;
+  const { name }: User = req.body.name;
+  try {
+    await UserModel.findByIdAndUpdate(id, { name: name });
+  } catch (err) {
+    console.log("Error: ", err);
+  }
+});
 
 const PORT = process.env.PORT;
 app.listen(PORT, () => {
