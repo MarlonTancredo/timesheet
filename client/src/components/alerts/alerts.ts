@@ -9,7 +9,7 @@ export const succesAlert = (message: string) => {
   });
 };
 
-export const fillFields = (message: string) => {
+export const warningAlert = (message: string) => {
   Swal.fire({
     title: message,
     icon: "warning",
@@ -18,52 +18,7 @@ export const fillFields = (message: string) => {
   });
 };
 
-export const equalPasswords = (message: string) => {
-  Swal.fire({
-    title: message,
-    icon: "warning",
-    confirmButtonText: "OK",
-    confirmButtonColor: "confirm",
-  });
-};
-
-export const equalEmail = (message: string) => {
-  Swal.fire({
-    title: message,
-    icon: "warning",
-    confirmButtonText: "OK",
-    confirmButtonColor: "confirm",
-  });
-};
-
-export const emailExistent = (message: string) => {
-  Swal.fire({
-    title: message,
-    icon: "warning",
-    confirmButtonText: "OK",
-    confirmButtonColor: "confirm",
-  });
-};
-
-export const signupSuccess = (message: string) => {
-  Swal.fire({
-    title: message,
-    icon: "success",
-    confirmButtonText: "OK",
-    confirmButtonColor: "confirm",
-  });
-};
-
-export const wrongLogin = (message: string) => {
-  Swal.fire({
-    title: message,
-    icon: "error",
-    confirmButtonText: "OK",
-    confirmButtonColor: "confirm",
-  });
-};
-
-export const noDataBase = (message: string) => {
+export const errorAlert = (message: string) => {
   Swal.fire({
     title: message,
     icon: "error",

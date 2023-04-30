@@ -1,12 +1,7 @@
 import * as F from "../styles/forms/styles";
 import * as S from "./styles";
 
-import {
-  succesAlert,
-  fillFields,
-  wrongLogin,
-  noDataBase,
-} from "../alerts/alerts";
+import { succesAlert, warningAlert, errorAlert } from "../alerts/alerts";
 
 import FormButton from "../form-button/FormButton";
 
@@ -71,7 +66,7 @@ const SignIn = () => {
       setUsers(data);
     } catch (error) {
       console.log(error);
-      noDataBase("No response!");
+      errorAlert("No response!");
     }
   };
 
@@ -91,12 +86,12 @@ const SignIn = () => {
 
   const handleSignButton = () => {
     if (email === "") {
-      fillFields("You must to enter your e-mail!");
+      warningAlert("You must to enter your e-mail!");
       return;
     }
 
     if (password === "") {
-      fillFields("You must to enter your password!");
+      warningAlert("You must to enter your password!");
       return;
     }
 
@@ -105,7 +100,7 @@ const SignIn = () => {
         succesAlert("Login success!");
         break;
       } else {
-        wrongLogin("Wrong login!");
+        warningAlert("Wrong login!");
         clearAllField();
       }
     }

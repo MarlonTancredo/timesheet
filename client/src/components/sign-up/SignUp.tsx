@@ -1,14 +1,7 @@
 import * as F from "../styles/forms/styles";
 import FormButton from "../form-button/FormButton";
 
-import {
-  signupSuccess,
-  fillFields,
-  equalPasswords,
-  equalEmail,
-  emailExistent,
-  noDataBase,
-} from "../alerts/alerts";
+import { succesAlert, warningAlert, errorAlert } from "../alerts/alerts";
 
 import { useReducer, useEffect, useState } from "react";
 
@@ -104,15 +97,16 @@ const SignUp = () => {
       setUsers(data);
     } catch (error) {
       console.log(error);
-      noDataBase("No connection!");
+      errorAlert("No connection!");
     }
   };
 
   const saveUser = () => {
     try {
       Axios.post(usersUrl, state);
-      signupSuccess("Sign up success!");
+      succesAlert("Sign up success!");
     } catch (err) {
+      errorAlert("No response!");
       console.log(err);
     }
   };
@@ -159,32 +153,30 @@ const SignUp = () => {
       password === "" ||
       confirmPassword === ""
     ) {
-      fillFields("You must to fill all fields!");
+      warningAlert("You must to fill all fields!");
       return;
     }
 
     if (password !== confirmPassword) {
-      equalPasswords("Password and confirm password must to be the same!");
+      warningAlert("Password and confirm password must to be the same!");
       clearPasswordFields();
       return;
     }
 
     if (email !== confirmEmail) {
-      equalEmail("Email and confirm email must to be the same!");
+      warningAlert("Email and confirm email must to be the same!");
       clearEmailFields();
       return;
     }
 
     for (let i = 0; i < users.length; i++) {
       if (email === users[i].email) {
-        emailExistent("This e-mail already exists!");
+        warningAlert("This e-mail already exists!");
         clearEmailFields();
         return;
       }
     }
-
     saveUser();
-
     clearAllFields();
   };
 
