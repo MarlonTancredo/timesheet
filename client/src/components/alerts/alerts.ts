@@ -1,71 +1,71 @@
 import Swal from "sweetalert2";
 
-export const succesAlert = () => {
+export const succesAlert = (message: string) => {
   Swal.fire({
-    title: "Login success!",
+    title: message,
     icon: "success",
     confirmButtonText: "OK",
     confirmButtonColor: "confirm",
   });
 };
 
-export const fillFields = () => {
+export const fillFields = (message: string) => {
   Swal.fire({
-    title: "You must to fill all fields!",
+    title: message,
     icon: "warning",
     confirmButtonText: "OK",
     confirmButtonColor: "confirm",
   });
 };
 
-export const equalPasswords = () => {
+export const equalPasswords = (message: string) => {
   Swal.fire({
-    title: "Passwords must to be equal!",
+    title: message,
     icon: "warning",
     confirmButtonText: "OK",
     confirmButtonColor: "confirm",
   });
 };
 
-export const equalEmail = () => {
+export const equalEmail = (message: string) => {
   Swal.fire({
-    title: "Emails must to be equal!",
+    title: message,
     icon: "warning",
     confirmButtonText: "OK",
     confirmButtonColor: "confirm",
   });
 };
 
-export const emailExistent = () => {
+export const emailExistent = (message: string) => {
   Swal.fire({
-    title: "This e-mail already exists, please enter a different one!",
+    title: message,
     icon: "warning",
     confirmButtonText: "OK",
     confirmButtonColor: "confirm",
   });
 };
 
-export const signupSuccess = () => {
+export const signupSuccess = (message: string) => {
   Swal.fire({
-    title: "Sign up success!",
+    title: message,
     icon: "success",
     confirmButtonText: "OK",
     confirmButtonColor: "confirm",
   });
 };
 
-export const wrongLogin = () => {
+export const wrongLogin = (message: string) => {
   Swal.fire({
-    title: "Wrong Login",
+    title: message,
     icon: "error",
     confirmButtonText: "OK",
     confirmButtonColor: "confirm",
   });
 };
 
-export const noDataBase = () => {
+export const noDataBase = (message: string) => {
   Swal.fire({
-    title: "No data base connection!",
+    title: message,
     icon: "error",
     confirmButtonText: "OK",
     confirmButtonColor: "confirm",

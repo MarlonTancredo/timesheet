@@ -104,30 +104,16 @@ const SignUp = () => {
       setUsers(data);
     } catch (error) {
       console.log(error);
-      noDataBase();
+      noDataBase("No connection!");
     }
   };
 
-  const saveUser = ({
-    name,
-    surname,
-    email,
-    confirmEmail,
-    password,
-    confirmPassword,
-  }: Users) => {
+  const saveUser = () => {
     try {
-      Axios.post(usersUrl, {
-        name: name,
-        surname: surname,
-        email: email,
-        confirmEmail: confirmEmail,
-        password: password,
-        confirmPassword: confirmPassword,
-      });
-      signupSuccess();
+      Axios.post(usersUrl, state);
+      signupSuccess("Sign up success!");
     } catch (err) {
-      console.log("tes", err);
+      console.log(err);
     }
   };
 
@@ -173,32 +159,31 @@ const SignUp = () => {
       password === "" ||
       confirmPassword === ""
     ) {
-      equalPasswords();
-      fillFields();
+      fillFields("You must to fill all fields!");
       return;
     }
 
     if (password !== confirmPassword) {
-      equalPasswords();
+      equalPasswords("Password and confirm password must to be the same!");
       clearPasswordFields();
       return;
     }
 
     if (email !== confirmEmail) {
-      equalEmail();
+      equalEmail("Email and confirm email must to be the same!");
       clearEmailFields();
       return;
     }
 
     for (let i = 0; i < users.length; i++) {
       if (email === users[i].email) {
-        emailExistent();
+        emailExistent("This e-mail already exists!");
         clearEmailFields();
         return;
       }
     }
 
-    saveUser({ name, surname, email, confirmEmail, password, confirmPassword });
+    saveUser();
 
     clearAllFields();
   };

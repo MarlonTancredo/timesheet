@@ -71,7 +71,7 @@ const SignIn = () => {
       setUsers(data);
     } catch (error) {
       console.log(error);
-      noDataBase();
+      noDataBase("No response!");
     }
   };
 
@@ -91,21 +91,21 @@ const SignIn = () => {
 
   const handleSignButton = () => {
     if (email === "") {
-      fillFields();
+      fillFields("You must to enter your e-mail!");
       return;
     }
 
     if (password === "") {
-      fillFields();
+      fillFields("You must to enter your password!");
       return;
     }
 
     for (let i = 0; i < users.length; i++) {
       if (email === users[i].email && password === users[i].password) {
-        succesAlert();
+        succesAlert("Login success!");
         break;
       } else {
-        wrongLogin();
+        wrongLogin("Wrong login!");
         clearAllField();
       }
     }
