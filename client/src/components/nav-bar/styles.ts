@@ -5,8 +5,8 @@ import colors from "../styles/colors/styles";
 export const Wrapper = styled.nav`
   display: flex;
   flex-direction: row;
-  background-color: ${colors.grey};
-  color: ${colors.fullGrey};
+  background-color: ${colors.fullGrey};
+  color: ${colors.white};
   width: 100%;
   height: auto;
   align-items: center;

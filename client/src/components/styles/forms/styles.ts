@@ -8,6 +8,8 @@ export const Wrapper = styled.div`
   flex-direction: column;
   align-items: center;
   margin-bottom: 3rem;
+  box-shadow: 0 6px 20px 0 ${colors.grey};
+  padding: 1rem;
 `;
 
 export const FormWrapper = styled.form`
@@ -37,17 +39,25 @@ export const Input = styled.input`
   height: 3rem;
   margin-bottom: 1rem;
   border: ${colors.grey} solid 1px;
+  border-radius: 0.25em;
 `;
 
 export const StyledLink = styled.div`
   a {
     margin-right: 2rem;
     text-decoration: transparent;
-    color: ${colors.fullGrey};
+    color: ${colors.white};
     cursor: pointer;
-    transition: 0.6s;
+    transition: 0.1s;
   }
   a:hover {
     text-decoration: underline;
+  }
+`;
+
+//Home page styles
+export const HomeStyledLink = styled(StyledLink)`
+  a {
+    color: ${colors.fullGrey};
   }
 `;

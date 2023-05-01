@@ -5,10 +5,10 @@ import { Link } from "react-router-dom";
 const HomePage = () => {
   return (
     <F.Wrapper>
-      <F.StyledLink>
+      <F.HomeStyledLink>
         <Link to={"/sign-in"}>Enter you login!</Link>
         <Link to={"/sign-up"}>Still not registered?</Link>
-      </F.StyledLink>
+      </F.HomeStyledLink>
     </F.Wrapper>
   );
 };

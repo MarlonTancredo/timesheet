@@ -106,7 +106,7 @@ const SignUp = () => {
       Axios.post(usersUrl, state);
       succesAlert("Sign up success!");
     } catch (err) {
-      errorAlert("No response!");
+      errorAlert("No database response!");
       console.log(err);
     }
   };

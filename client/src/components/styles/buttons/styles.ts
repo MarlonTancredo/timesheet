@@ -5,16 +5,17 @@ import colors from "../colors/styles";
 export const FormButtomWrapper = styled.div``;
 
 export const FormButton = styled.button`
-  font-size: 16px;
-  color: ${colors.fullGrey};
+  font-size: 1em;
+  color: ${colors.white};
   margin-top: 1.5rem;
-  height: 2.5rem;
+  height: 3rem;
   width: 100%;
-  border: 1px ${colors.grey} solid;
-  border-radius: 2px;
+  border: none;
+  background-color: ${colors.blue};
+  border-radius: 0.25em;
   cursor: pointer;
-  transition: 0.6s;
+  transition: 0.1s;
   &:hover {
-    background-color: ${colors.grey};
+    background-color: ${colors.hoverBlue};
   }
 `;

@@ -64,9 +64,10 @@ const SignIn = () => {
       const users = await Axios.get(usersPath);
       const data = await users.data;
       setUsers(data);
+      console.log(data);
     } catch (error) {
       console.log(error);
-      errorAlert("No response!");
+      errorAlert("No data base response!");
     }
   };
 
@@ -98,6 +99,7 @@ const SignIn = () => {
     for (let i = 0; i < users.length; i++) {
       if (email === users[i].email && password === users[i].password) {
         succesAlert("Login success!");
+        clearAllField();
         break;
       } else {
         warningAlert("Wrong login!");
