@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 
 import colors from "../colors/styles";
 
@@ -56,6 +56,22 @@ export const StyledLink = styled.div`
 `;
 
 //Home page styles
+const leftSlide = keyframes`
+ from { 
+  transform: translateX(-400px);
+ }
+ to { 
+  transform: translateX(0px);
+ }
+ `;
+
+export const HomeWrapper = styled(Wrapper)`
+  animation-name: ${leftSlide};
+  animation-duration: 0.8s;
+  animation-timing-function: linear;
+  animation-iteration-count: 1;
+`;
+
 export const HomeStyledLink = styled(StyledLink)`
   a {
     color: ${colors.fullGrey};
