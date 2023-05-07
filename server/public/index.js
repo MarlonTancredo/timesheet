@@ -57,11 +57,11 @@ mongoose_1.default
     console.log("Error: " + err);
 });
 app.post("/users", function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var _a, name, surname, email, confirmEmail, password, confirmPassword, user, err_1;
+    var _a, name, surname, email, confirmEmail, password, confirmPassword, isLogged, user, err_1;
     return __generator(this, function (_b) {
         switch (_b.label) {
             case 0:
-                _a = req.body, name = _a.name, surname = _a.surname, email = _a.email, confirmEmail = _a.confirmEmail, password = _a.password, confirmPassword = _a.confirmPassword;
+                _a = req.body, name = _a.name, surname = _a.surname, email = _a.email, confirmEmail = _a.confirmEmail, password = _a.password, confirmPassword = _a.confirmPassword, isLogged = _a.isLogged;
                 user = new User_1.default({
                     name: name,
                     surname: surname,
@@ -69,6 +69,7 @@ app.post("/users", function (req, res) { return __awaiter(void 0, void 0, void 0
                     confirmEmail: confirmEmail,
                     password: password,
                     confirmPassword: confirmPassword,
+                    isLogged: isLogged,
                 });
                 _b.label = 1;
             case 1:

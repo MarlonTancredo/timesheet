@@ -12,6 +12,7 @@ type User = {
   confirmEmail: string;
   password: string;
   confirmPassword: string;
+  isLogged: boolean;
 };
 
 const app = express();
@@ -37,6 +38,7 @@ app.post("/users", async (req: Request, res: Response) => {
     confirmEmail,
     password,
     confirmPassword,
+    isLogged,
   }: User = req.body;
 
   const user = new UserModel({
@@ -46,6 +48,7 @@ app.post("/users", async (req: Request, res: Response) => {
     confirmEmail: confirmEmail,
     password: password,
     confirmPassword: confirmPassword,
+    isLogged: isLogged,
   });
   try {
     await user.save();
@@ -67,21 +70,10 @@ app.get("/users", async (req, res: Response) => {
 
 app.delete("/users/:id", async (req: Request, res) => {
   const id = req.params.id;
-
   try {
     await UserModel.deleteOne({ _id: id });
   } catch (err) {
     console.log("error", err);
-  }
-});
-
-app.put("/users/:id", async (req: Request, res) => {
-  const id = req.params.id;
-  const { name }: User = req.body.name;
-  try {
-    await UserModel.findByIdAndUpdate(id, { name: name });
-  } catch (err) {
-    console.log("Error: ", err);
   }
 });
 

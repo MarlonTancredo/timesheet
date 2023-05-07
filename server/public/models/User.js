@@ -29,6 +29,10 @@ var UserSchema = new mongoose_1.default.Schema({
         type: String,
         require: true,
     },
+    isLogged: {
+        type: Boolean,
+        require: true,
+    },
 });
 var UserModel = mongoose_1.default.model("users", UserSchema);
 exports.default = UserModel;
