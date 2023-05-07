@@ -48,7 +48,7 @@ export const StyledLink = styled.div`
     text-decoration: transparent;
     color: ${colors.white};
     cursor: pointer;
-    transition: 0.1s;
+    transition: 0.3s;
   }
   a:hover {
     text-decoration: underline;
@@ -67,7 +67,7 @@ const leftSlide = keyframes`
 
 export const HomeWrapper = styled(Wrapper)`
   animation-name: ${leftSlide};
-  animation-duration: 0.8s;
+  animation-duration: 0.3s;
   animation-timing-function: linear;
   animation-iteration-count: 1;
 `;
