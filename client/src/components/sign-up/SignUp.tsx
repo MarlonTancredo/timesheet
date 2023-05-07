@@ -1,20 +1,11 @@
 import * as F from "../styles/forms/styles";
 import FormButton from "../form-button/FormButton";
 
-import { succesAlert, warningAlert, errorAlert } from "../alerts/alerts";
+import { succesAlert, warningAlert, errorAlert } from "../styles/alerts/alerts";
 
 import { useReducer, useEffect, useState } from "react";
 
 import Axios from "axios";
-
-type InitialState = {
-  name: string;
-  surname: string;
-  email: string;
-  confirmEmail: string;
-  password: string;
-  confirmPassword: string;
-};
 
 type State = {
   name?: string;
@@ -23,32 +14,13 @@ type State = {
   confirmEmail?: string;
   password?: string;
   confirmPassword?: string;
+  isLogged: boolean;
 };
 
 type Action = {
   type?: string;
   value?: string;
 };
-
-type Users = {
-  name?: string;
-  surname?: string;
-  email?: string;
-  confirmEmail?: string;
-  password?: string;
-  confirmPassword?: string;
-};
-
-const initialState: InitialState = {
-  name: "",
-  surname: "",
-  email: "",
-  confirmEmail: "",
-  password: "",
-  confirmPassword: "",
-};
-
-const usersUrl = "http://localhost:3001/users";
 
 const reducer = (state: State, action: Action): State => {
   const { type, value } = action;
@@ -84,12 +56,43 @@ const reducer = (state: State, action: Action): State => {
   }
 };
 
+type InitialState = {
+  name: string;
+  surname: string;
+  email: string;
+  confirmEmail: string;
+  password: string;
+  confirmPassword: string;
+  isLogged: boolean;
+};
+
+const initialState: InitialState = {
+  name: "",
+  surname: "",
+  email: "",
+  confirmEmail: "",
+  password: "",
+  confirmPassword: "",
+  isLogged: false,
+};
+
+type Users = {
+  name: string;
+  surname: string;
+  email: string;
+  confirmEmail: string;
+  password: string;
+  confirmPassword: string;
+  isLogged: boolean;
+};
+
 const SignUp = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
   const { name, surname, email, confirmEmail, password, confirmPassword } =
     state;
   const [users, setUsers] = useState<Users[]>([]);
 
+  const usersUrl = "http://localhost:3001/users";
   const getUsers = async () => {
     try {
       const users = await Axios.get(usersUrl);
@@ -97,7 +100,7 @@ const SignUp = () => {
       setUsers(data);
     } catch (error) {
       console.log(error);
-      errorAlert("No connection!");
+      errorAlert("No database response!");
     }
   };
 
@@ -227,7 +230,7 @@ const SignUp = () => {
         />
         <F.FieldsNames>Password</F.FieldsNames>
         <F.Input
-          value={state.password}
+          value={password}
           name="password"
           type="password"
           maxLength={60}
