@@ -1,7 +1,7 @@
 import * as F from "../styles/forms/styles";
 import * as S from "./styles";
 
-import { succesAlert, warningAlert, errorAlert } from "../alerts/alerts";
+import { succesAlert, warningAlert, errorAlert } from "../styles/alerts/alerts";
 
 import FormButton from "../form-button/FormButton";
 
@@ -26,10 +26,12 @@ type Action = {
 };
 
 type Users = {
-  email?: string;
-  password?: string;
+  _id: string;
   name?: string;
   surname?: string;
+  email?: string;
+  password?: string;
+  isLogged: boolean;
 };
 
 const reducer = (state: State, action: Action): State => {
@@ -51,9 +53,9 @@ const initialState: InitialState = {
   password: "",
 };
 
-const usersPath = "http://localhost:3001/users";
+const usersUrl = "http://localhost:3001/users";
 
-const SignIn = () => {
+const SignIn = ({ sendToApp }: any) => {
   const [state, dispatch] = useReducer(reducer, initialState);
   const { email, password } = state;
 
@@ -61,13 +63,13 @@ const SignIn = () => {
 
   const getUsers = async () => {
     try {
-      const users = await Axios.get(usersPath);
+      const users = await Axios.get(usersUrl);
       const data = await users.data;
       setUsers(data);
-      console.log(data);
+      // console.log(data);
     } catch (error) {
       console.log(error);
-      errorAlert("No data base response!");
+      errorAlert("No database response!");
     }
   };
 
@@ -98,6 +100,7 @@ const SignIn = () => {
 
     for (let i = 0; i < users.length; i++) {
       if (email === users[i].email && password === users[i].password) {
+        sendToApp(true);
         succesAlert("Login success!");
         clearAllField();
         break;
@@ -137,7 +140,9 @@ const SignIn = () => {
         />
         <S.ButtonSection>
           <S.SignInSection>
-            <FormButton name="Sign in" formButtonClick={handleSignButton} />
+            <Link to="/">
+              <FormButton name="Sign in" formButtonClick={handleSignButton} />
+            </Link>
           </S.SignInSection>
           <S.SignUpSection>
             <Link to="/sign-up">
